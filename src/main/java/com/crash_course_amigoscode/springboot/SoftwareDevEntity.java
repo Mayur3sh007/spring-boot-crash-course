@@ -1,12 +1,29 @@
 package com.crash_course_amigoscode.springboot;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.Objects;
 
+@Entity
 public class SoftwareDevEntity {
 
+    // This simple annotation makes the below fields into our DB columns and this is facilitated by hibernate-JPA
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
     private String name;
     private String techStack;
+
+//    🧠 Why JPA Needs a No-Args Constructor
+//    JPA/Hibernate uses reflection to create objects.
+//    When it loads data from the DB, it doesn’t know what values to pass, so it:
+//    Creates an empty object with new SoftwareDevEntity()
+//    Then sets the fields using reflection or setters.
+    public SoftwareDevEntity() {
+    }
 
     public SoftwareDevEntity(Integer id, String name, String techStack) {
         Id = id;

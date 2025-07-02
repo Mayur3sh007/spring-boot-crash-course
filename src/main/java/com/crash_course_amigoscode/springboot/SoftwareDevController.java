@@ -10,19 +10,14 @@ import java.util.List;
 @RequestMapping("api/v1/software-devs")
 public class SoftwareDevController {
 
+    private final SoftwareDevService softwareDevService;
+
+    public SoftwareDevController(SoftwareDevService softwareDevService) {
+        this.softwareDevService = softwareDevService;
+    }
+
     @GetMapping
-    public List<SoftwareDevEntity> getDevs() {
-        return List.of(
-                new SoftwareDevEntity(
-                        1,
-                        "Mayuresh",
-                        "MERN,Next,Springboot"
-                        ),
-                new SoftwareDevEntity(
-                    2,
-                    "Redkira",
-                    "hockey,volleyball,cricket"
-                )
-        );
+    public List<SoftwareDevEntity> getAllDevs() {
+        return softwareDevService.fetchDevData();
     }
 }
